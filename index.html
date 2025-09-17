@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>苗栗地圖導覽</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    #map-container {
+      position: relative;
+      display: inline-block;
+    }
+    #map-container img {
+      max-width: 100%;
+      height: auto;
+    }
+    .town-info {
+      display: none;
+      margin-top: 20px;
+    }
+    .town-info img {
+      max-width: 300px;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>苗栗地圖導覽</h1>
+
+  <div id="map-container">
+    <img src="miaoli_map.png" usemap="#miaoli-map" alt="苗栗地圖">
+    <map name="miaoli-map">
+      <!-- 假設你已經知道各鄉鎮的座標 -->
+      <area shape="rect" coords="50,50,150,150" href="#" onclick="showTown('taian');" alt="泰安鄉">
+      <area shape="rect" coords="200,50,300,150" href="#" onclick="showTown('tongluo');" alt="通霄鎮">
+      <area shape="rect" coords="350,50,450,150" href="#" onclick="showTown('toufen');" alt="頭份市">
+      <!-- 可依需要增加其他鄉鎮 -->
+    </map>
+  </div>
+
+  <div id="town-info" class="town-info">
+    <h2 id="town-name"></h2>
+    <img id="town-image" src="" alt="鄉鎮圖片">
+    <p id="town-description"></p>
+    <div class="back-btn" onclick="backToMap()">返回地圖</div>
+  </div>
+
+  <script>
+    const towns = {
+      taian: {
+        name: "泰安鄉",
+        image: "taian.jpg",
+        description: "泰安鄉位於苗栗縣中部，以自然景觀著名，有雪霸國家公園。"
+      },
+      tongluo: {
+        name: "通霄鎮",
+        image: "tongluo.jpg",
+        description: "通霄鎮有豐富的海岸線景觀，著名景點包括飛牛牧場。"
+      },
+      toufen: {
+        name: "頭份市",
+        image: "toufen.jpg",
+        description: "頭份市是苗栗縣人口較多的城市之一，發展快速。"
+      }
+    };
+
+    function showTown(townKey) {
+      const town = towns[townKey];
+      if (!town) return;
+
+      document.getElementById("town-name").innerText = town.name;
+      document.getElementById("town-image").src = town.image;
+      document.getElementById("town-description").innerText = town.description;
+
+      document.getElementById("map-container").style.display = "none";
+      document.getElementById("town-info").style.display = "block";
+    }
+
+    function backToMap() {
+      document.getElementById("town-info").style.display = "none";
+      document.getElementById("map-container").style.display = "inline-block";
+    }
+  </script>
+
+</body>
+</html>
 
